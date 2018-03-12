@@ -12,3 +12,9 @@ datagroup: molly_thesis_default_datagroup {
 }
 
 persist_with: molly_thesis_default_datagroup
+
+
+
+explore: flow {
+  label: "Spinner Demographics"
+  }
