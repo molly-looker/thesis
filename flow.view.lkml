@@ -1,9 +1,15 @@
 view: flow {
-  sql_table_name: SpinnerDemo.flow ;;
+  sql_table_name: SpinnerDemo.spin ;;
 
   dimension: age {
     type: number
     sql: ${TABLE}.Age ;;
+  }
+
+  dimension: PK {
+    primary_key: yes
+    type: number
+    sql: ${TABLE}.PK ;;
   }
 
   dimension: are_you_more_likely_to {
