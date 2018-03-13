@@ -191,6 +191,10 @@ view: flow {
     sql: ${TABLE}.Timestamp ;;
   }
 
+#   dimension: pkey {
+#     sql: ${timestamp_raw} ;;
+#   }
+
   dimension: what_are_the_biggest_improvements_in_flow_arts_hardware_you_d_like_to_see_ {
     type: string
     sql: ${TABLE}.What_are_the_biggest_improvements_in_flow_arts_hardware_you_d_like_to_see_ ;;
@@ -266,10 +270,11 @@ view: flow {
     sql: ${TABLE}.Which_of_the_following_do_you_own_ ;;
   }
 
-  dimension: which_props_do_you_use_ {
-    type: string
-    sql: ${TABLE}.Which_props_do_you_use_ ;;
-  }
+# extracted into props view
+#   dimension: which_props_do_you_use_ {
+#     type: string
+#     sql: ${TABLE}.Which_props_do_you_use_ ;;
+#   }
 
   measure: count {
     type: count

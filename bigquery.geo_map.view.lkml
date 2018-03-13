@@ -1,3 +1,4 @@
+explore: bq_logrecno_bg_map  {}
 view: bq_logrecno_bg_map {
   label: "Geography"
   derived_table: {
@@ -45,12 +46,13 @@ view: bq_logrecno_bg_map {
       LEFT JOIN `looker-datablocks.acs_fast_facts.block_group_attribs` as tr on (SUBSTR(geo.GEOID, 8, 11) = SUBSTR(tr.geoid, 1, 11) AND geo.SUMLEVEL = '140')
       WHERE
         sumlevel in ('140', '150')
-      GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ;;
+      GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
+      ;;
     persist_for: "10000 hours"
   }
   dimension: row_id {sql: ${TABLE}.row_id;;
     primary_key:yes
-    hidden: yes
+#     hidden: yes
   }
   dimension: geoid11 {hidden:yes}
   dimension: logrecno  {hidden:yes}
@@ -187,6 +189,10 @@ view: bq_logrecno_bg_map {
     label: "Square Miles of Water"
     type: sum
     value_format_name: decimal_2
+  }
+
+  measure: count {
+    type: count
   }
 
 #   measure: count_block {
