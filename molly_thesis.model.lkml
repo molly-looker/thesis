@@ -35,3 +35,12 @@ explore: props {
       sql_on:  ${flow.PK} = ${religion.PK} ;;
     }
   }
+
+explore: relationships {
+  label: "Relationship Status"
+  join: flow {
+    type:  left_outer
+    relationship: many_to_one
+    sql_on: ${flow.PK} = ${relationships.PK} ;;
+  }
+}

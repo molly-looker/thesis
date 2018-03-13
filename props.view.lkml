@@ -6,7 +6,7 @@ view: props {
   prop_name
 FROM `lookerdata.SpinnerDemo.spin`  AS flow
 LEFT JOIN UNNEST(SPLIT(LOWER(TRIM(which_props_do_you_use_,', ')))) as prop_name
-{% condition prop %} prop_name {% endcondition %}
+WHERE {% condition prop %} prop_name {% endcondition %}
 GROUP BY 1,2
 ORDER BY 1 DESC ;;
   }

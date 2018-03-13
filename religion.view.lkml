@@ -24,6 +24,5 @@ ORDER BY 1 DESC ;;
 
   measure: count {
     type: count
-
   }
 }
