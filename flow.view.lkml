@@ -6,6 +6,13 @@ view: flow {
     sql: ${TABLE}.Age ;;
   }
 
+  dimension: age_tier {
+    type: tier
+    tiers: [0, 18, 25, 35, 50, 64, 100]
+    style: integer
+    sql: ${age} ;;
+  }
+
   dimension: PK {
     primary_key: yes
     type: number
@@ -167,10 +174,11 @@ view: flow {
     sql: ${TABLE}.Relationship_Status ;;
   }
 
-  dimension: religion {
-    type: string
-    sql: ${TABLE}.Religion ;;
-  }
+# replaced by religion view
+#   dimension: religion {
+#     type: string
+#     sql: ${TABLE}.Religion ;;
+#   }
 
   dimension: sexual_orientation {
     type: string

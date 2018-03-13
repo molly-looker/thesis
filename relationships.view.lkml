@@ -1,12 +1,11 @@
-view: props {
+view: relationships {
   derived_table: {
     sql:
     SELECT
   PK,
-  prop_name
+  relationship
 FROM `lookerdata.SpinnerDemo.spin`  AS flow
-LEFT JOIN UNNEST(SPLIT(LOWER(TRIM(which_props_do_you_use_,', ')))) as prop_name
-{% condition prop %} prop_name {% endcondition %}
+LEFT JOIN UNNEST(SPLIT(LOWER(TRIM(relationship_status,', ')))) as relationship
 GROUP BY 1,2
 ORDER BY 1 DESC ;;
   }
@@ -17,14 +16,15 @@ ORDER BY 1 DESC ;;
     sql: ${TABLE}.PK ;;
   }
 
-  dimension: prop {
+  dimension: relationship {
     type:  string
-    sql:  ${TABLE}.prop_name;;
+    sql:  ${TABLE}.relationship ;;
     drill_fields: [PK]
   }
 
 
   measure: count {
     type: count
+    sql: ${TABLE}.relationship ;;
   }
 }

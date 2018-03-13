@@ -18,3 +18,20 @@ persist_with: molly_thesis_default_datagroup
 explore: flow {
   label: "Spinner Demographics"
   }
+
+explore: props {
+  label: "Props"
+  join: flow {
+    type: left_outer
+    relationship: many_to_one
+    sql_on:  ${flow.PK} = ${props.PK} ;;
+  }
+}
+  explore: religion {
+    label: "Spinner Religions"
+    join: flow {
+      type: left_outer
+      relationship: many_to_one
+      sql_on:  ${flow.PK} = ${religion.PK} ;;
+    }
+  }

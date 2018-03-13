@@ -1,12 +1,12 @@
-view: props {
+view: religion {
   derived_table: {
     sql:
     SELECT
   PK,
-  prop_name
+  religionz
 FROM `lookerdata.SpinnerDemo.spin`  AS flow
-LEFT JOIN UNNEST(SPLIT(LOWER(TRIM(which_props_do_you_use_,', ')))) as prop_name
-{% condition prop %} prop_name {% endcondition %}
+LEFT JOIN UNNEST(SPLIT(TRIM(LOWER(religion)),', ')) as religionz
+
 GROUP BY 1,2
 ORDER BY 1 DESC ;;
   }
@@ -17,14 +17,13 @@ ORDER BY 1 DESC ;;
     sql: ${TABLE}.PK ;;
   }
 
-  dimension: prop {
+  dimension: religion {
     type:  string
-    sql:  ${TABLE}.prop_name;;
-    drill_fields: [PK]
+    sql:  ${TABLE}.religionz ;;
   }
-
 
   measure: count {
     type: count
+
   }
 }
