@@ -1,12 +1,11 @@
-view: props {
+view: ethnicities {
   derived_table: {
     sql:
     SELECT
   PK,
-  prop_name
+  ethnicityy
 FROM `lookerdata.SpinnerDemo.spin`  AS flow
-LEFT JOIN UNNEST(SPLIT(LOWER(TRIM(which_props_do_you_use_,', ')))) as prop_name
-WHERE {% condition prop %} prop_name {% endcondition %}
+LEFT JOIN UNNEST(SPLIT(LOWER(TRIM(ethnicity, ', ')))) as ethnicityy
 GROUP BY 1,2
 ORDER BY 1 DESC ;;
   }
@@ -16,12 +15,11 @@ ORDER BY 1 DESC ;;
     sql: ${TABLE}.PK ;;
   }
 
-  dimension: prop {
+  dimension: ethnicity {
     type:  string
-    sql:  ${TABLE}.prop_name;;
+    sql:  TRIM(${TABLE}.ethnicityy) ;;
     drill_fields: [PK]
   }
-
 
   measure: count {
     type: count

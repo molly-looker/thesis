@@ -11,14 +11,15 @@ ORDER BY 1 DESC ;;
   }
 
   dimension: PK {
-    primary_key: yes
     type: number
     sql: ${TABLE}.PK ;;
   }
 
   dimension: relationship {
     type:  string
-    sql:  ${TABLE}.relationship ;;
+    sql:  case when (${TABLE}.relationship like "%poly%") then "polyamorous"
+              when (${TABLE}.relationship like "%open%") then "open relationship"
+              else ${TABLE}.relationship end ;;
     drill_fields: [PK]
   }
 

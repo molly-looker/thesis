@@ -12,14 +12,13 @@ ORDER BY 1 DESC ;;
   }
 
   dimension: PK {
-    primary_key: yes
     type: number
     sql: ${TABLE}.PK ;;
   }
 
   dimension: religion {
     type:  string
-    sql:  ${TABLE}.religionz ;;
+    sql:  ${TABLE}.religionz;;
   }
 
   measure: count {
