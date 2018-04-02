@@ -1,12 +1,11 @@
-view: religion {
+view: professional_events {
   derived_table: {
     sql:
     SELECT
   PK,
-  religionz
+  prof_events
 FROM `lookerdata.SpinnerDemo.spin`  AS flow
-LEFT JOIN UNNEST(SPLIT(TRIM(LOWER(religion)),', ')) as religionz
-
+LEFT JOIN UNNEST(SPLIT(TRIM(Have_you_in_the_past_year_,', '))) as prof_events
 GROUP BY 1,2
 ORDER BY 1 DESC ;;
   }
@@ -16,9 +15,9 @@ ORDER BY 1 DESC ;;
     sql: ${TABLE}.PK ;;
   }
 
-  dimension: religion {
+  dimension: prof_events {
     type:  string
-    sql:  ${TABLE}.religionz;;
+    sql:  TRIM(${TABLE}.prof_events) ;;
     drill_fields: [PK]
   }
 

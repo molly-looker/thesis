@@ -64,6 +64,7 @@ view: bq_logrecno_bg_map {
   dimension: stusab {
     label: "State Abbreviation"
     group_label: "State"
+    map_layer_name: us_states
     link: {
       url: "https://maps.google.com?q={{value}}"
       label: "Google Maps"
@@ -182,6 +183,7 @@ view: bq_logrecno_bg_map {
     label: "Square Miles of Land"
     type: sum
     value_format_name: decimal_2
+    drill_fields: [geo_drills*]
   }
 
   measure: sq_miles_water {
@@ -189,10 +191,12 @@ view: bq_logrecno_bg_map {
     label: "Square Miles of Water"
     type: sum
     value_format_name: decimal_2
+    drill_fields: [geo_drills*]
   }
 
   measure: count {
     type: count
+    drill_fields: [geo_drills*]
   }
 
 #   measure: count_block {
@@ -202,7 +206,7 @@ view: bq_logrecno_bg_map {
 #   }
 #
 #
-#   set: geo_drills {
-#     fields: [count_state, count_county, count_tract, block_group]
-#   }
+  set: geo_drills {
+    fields: [row_id, stusab, block_group_name]
+  }
 }

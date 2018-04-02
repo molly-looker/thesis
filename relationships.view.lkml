@@ -23,8 +23,4 @@ ORDER BY 1 DESC ;;
     drill_fields: [PK]
   }
 
-
-  measure: count {
-    type: count
-  }
 }

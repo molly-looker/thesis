@@ -47,4 +47,61 @@ explore: flow {
     relationship: many_to_one
     sql_on: ${flow.PK} = ${ethnicities.PK} ;;
   }
+
+  join: professional_events {
+    view_label: "Professional Events"
+    type:  left_outer
+    relationship: many_to_one
+    sql_on: ${flow.PK} = ${professional_events.PK} ;;
+  }
+
+  join: festivals {
+    view_label: "Festivals"
+    type:  left_outer
+    relationship: many_to_one
+    sql_on: ${flow.PK} = ${festivals.PK} ;;
+  }
+
+  join: purchasing {
+    view_label: "Purchase Criteria"
+    type:  left_outer
+    relationship: many_to_one
+    sql_on: ${flow.PK} = ${purchasing.PK} ;;
+  }
+
+  join: video {
+    view_label: "Video Watching Criteria"
+    type:  left_outer
+    relationship: many_to_one
+    sql_on: ${flow.PK} = ${video.PK} ;;
+  }
+
+  join: learning {
+    view_label: "Learning Methods"
+    type:  left_outer
+    relationship: many_to_one
+    sql_on: ${flow.PK} = ${learning.PK} ;;
+  }
+
+  join: platformz {
+    view_label: "Platforms"
+    type:  left_outer
+    relationship: many_to_one
+    sql_on: ${flow.PK} = ${platformz.PK} ;;
+  }
+
+  join: devices {
+    view_label: "Devices"
+    type:  left_outer
+    relationship: many_to_one
+    sql_on: ${flow.PK} = ${devices.PK} ;;
+  }
+
+  join: bq_logrecno_bg_map {
+    type: left_outer
+    relationship: many_to_many
+    sql_on: ${bq_logrecno_bg_map.stusab}=${flow.state} ;;
+  }
+
+
 }
