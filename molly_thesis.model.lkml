@@ -1,4 +1,4 @@
-connection: "lookerdata_publicdata_standard_sql"
+connection: "lookerdata_publicdata"
 
 # include all the views
 include: "*.view"

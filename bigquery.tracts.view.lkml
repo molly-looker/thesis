@@ -1,3 +1,4 @@
+
 view: bq_tract_zcta_map {
   label: "Geography"
   derived_table: {

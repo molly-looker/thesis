@@ -1,7 +1,8 @@
-connection: "lookerdata_publicdata_standard_sql"
+connection: "lookerdata_publicdata"
 
 # include all the BQ view files
 include: "*.explore"
+
 
 # include all the views
 include: "*.view"
@@ -21,4 +22,3 @@ persist_with: molly_thesis_default_datagroup
 explore: bq_block_group_facts {
   label: "Demographic Facts"
   }
-

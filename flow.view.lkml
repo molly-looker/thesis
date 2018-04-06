@@ -44,7 +44,7 @@ view: flow {
 
   dimension: average_income__yearly_ {
     type: string
-    sql: ${TABLE}.Average_Income__yearly_ ;;
+    sql: case when (${TABLE}.Average_Income__yearly_)="≥$100,000" then "more than $100,000" else ${TABLE}.Average_Income__yearly_ end    ;;
   }
 
 #uncleaned birth order
@@ -123,7 +123,7 @@ view: flow {
   dimension: flow_videos {
     description: "How may online flow arts-related videos do you watch per month?"
     type: string
-    sql: case when ${TABLE}.How_many_online_flow_arts_related_videos_do_you_watch_per_month_ is null then "None" else
+    sql: case when (${TABLE}.How_many_online_flow_arts_related_videos_do_you_watch_per_month_ is null or ${TABLE}.How_many_online_flow_arts_related_videos_do_you_watch_per_month_="None") then "0" else
     ${TABLE}.How_many_online_flow_arts_related_videos_do_you_watch_per_month_ end;;
   }
 
@@ -162,8 +162,9 @@ view: flow {
   dimension: number_of_festivals {
     description: "Number of festivals attended in the past year"
     type: string
-    sql: case when ${TABLE}.Number_of_festivals_attended_in_the_past_year is null
-    then "None" else ${TABLE}.Number_of_festivals_attended_in_the_past_year end;;
+    sql: case when (${TABLE}.Number_of_festivals_attended_in_the_past_year is null or ${TABLE}.Number_of_festivals_attended_in_the_past_year="None")
+    then "0"
+    when ${TABLE}.Number_of_festivals_attended_in_the_past_year="10+" then "more than 10" else ${TABLE}.Number_of_festivals_attended_in_the_past_year end;;
   }
 
   dimension: number_of_lessons {
@@ -184,8 +185,9 @@ view: flow {
 
   dimension: number_of_workshops_attended_in_the_past_year {
     type: string
-    sql: case when(${TABLE}.Number_of_workshops_attended_in_the_past_year__fire_flow_festivals_or_traveling_teacher_ is null) then "None"
-    when (${TABLE}.Number_of_workshops_attended_in_the_past_year__fire_flow_festivals_or_traveling_teacher_="Too many to count") then "16+"
+    sql: case when(${TABLE}.Number_of_workshops_attended_in_the_past_year__fire_flow_festivals_or_traveling_teacher_ is null or ${TABLE}.Number_of_workshops_attended_in_the_past_year__fire_flow_festivals_or_traveling_teacher_="None") then "0"
+    when (${TABLE}.Number_of_workshops_attended_in_the_past_year__fire_flow_festivals_or_traveling_teacher_="Too many to count" or ${TABLE}.Number_of_workshops_attended_in_the_past_year__fire_flow_festivals_or_traveling_teacher_="11-15"
+    or ${TABLE}.Number_of_workshops_attended_in_the_past_year__fire_flow_festivals_or_traveling_teacher_="16+") then "more than 10"
     else ${TABLE}.Number_of_workshops_attended_in_the_past_year__fire_flow_festivals_or_traveling_teacher_ end
     ;;
   }
@@ -263,7 +265,7 @@ view: flow {
      label: "Spinners Per Capita"
      type:  number
     value_format_name: percent_2
-     sql:  ${countUSA}/${bq_logrecno_bg_map.count};;
+     sql:  case when (${bq_logrecno_bg_map.count} is null or ${bq_logrecno_bg_map.count}=0) then 0 else ${countUSA}/${bq_logrecno_bg_map.count} end;;
    }
 
   measure: avg_practice_hours{
@@ -285,11 +287,61 @@ view: flow {
 
   measure: percent_spinners_under_18 {
     type: number
-    sql: sum(case when ${TABLE}.age<=17 then 1 else 0 end)/${count} ;;
+    sql: (sum(case when ${TABLE}.age<=17 then 1 else 0 end)/${count}) ;;
     value_format_name: percent_2
   }
-}
 
+
+  measure: under18percapita {
+   type: number
+   sql: (22/74487716)*1000 ;;
+#   value_format_name: percent_6
+  }
+
+  measure: 18_to_64percapita {
+    type: number
+    sql: (975/200398621)*1000  ;;
+  #  value_format_name: percent_6
+  }
+
+  measure: 65overpercapita {
+    type: number
+    sql: (2/45211757)*1000 ;;
+   # value_format_name: percent_6
+  }
+
+
+
+  measure: white_per_capita {
+    type: number
+    sql: (874/243785900)*1000 ;;
+#   value_format_name: percent_6
+  }
+
+  measure: asian_per_capita {
+    type: number
+    sql: (75/19180358)*1000  ;;
+    #  value_format_name: percent_6
+  }
+
+  measure: hispanic_per_capita {
+    type: number
+    sql: (65/57779493)*1000 ;;
+    # value_format_name: percent_6
+  }
+
+  measure: indian_per_capita {
+    type: number
+    sql: (0)*1000 ;;
+    # value_format_name: percent_6
+  }
+
+  measure: black_per_capita {
+    type: number
+    sql: (31/44200910)*1000 ;;
+    # value_format_name: percent_6
+  }
+}
 
 #i don't care about this metric
 #   dimension: number_of_instructional_dvds {
