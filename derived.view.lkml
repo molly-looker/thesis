@@ -17,3 +17,6 @@ view: derived {
     sql: ${TABLE}.PK ;;
   }
 }
+
+
+explore: derived {}
