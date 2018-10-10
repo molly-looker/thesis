@@ -1,5 +1,6 @@
 view: props {
   derived_table: {
+
     sql:
     SELECT
   PK,
@@ -10,6 +11,7 @@ WHERE {% condition prop_contains %} prop_name {% endcondition %} and prop_name i
 --WHERE prop_name like {% parameter prop_contains %} and prop_name is not null
 GROUP BY 1,2
 ORDER BY 1 DESC ;;
+
   }
 
   dimension: PK {
@@ -27,6 +29,10 @@ ORDER BY 1 DESC ;;
     sql: ${TABLE}.prop_name ;;
     html: <img src="http://aqueous-refuge-78065.herokuapp.com/api.php?q=object%25manipulation%25{{value | url_param_escape }}"  />
       ;; }
+
+  measure: count {
+    type: count
+  }
 
 
 filter: prop_contains {

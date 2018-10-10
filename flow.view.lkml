@@ -24,6 +24,12 @@ view: flow {
     sql:  ${TABLE}.city ;;
   }
 
+  dimension: testdate {
+    type: date
+    sql:  NULL;;
+  }
+
+
   dimension: state {
     map_layer_name: us_states
     sql:  case when UPPER(${TABLE}.state)="D.C." then "DC" else UPPER(${TABLE}.state) end ;;
@@ -240,6 +246,11 @@ view: flow {
 
   measure: count {
     type: count
+   # drill_fields: [details*]
+    link: {
+     label: "Another Awesome Explore"
+      url: "/explore/molly_thesis/flow?qid=BpZzCrf5gaxYHHDPkoOjl4"
+      }
   }
 
   measure: surveyanswerers {
@@ -340,6 +351,10 @@ view: flow {
     type: number
     sql: (31/44200910)*1000 ;;
     # value_format_name: percent_6
+  }
+
+  set: details {
+    fields: [PK, age, city]
   }
 }
 
