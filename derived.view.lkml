@@ -3,7 +3,7 @@ view: derived {
 
   derived_table: {
   sql: select * from SpinnerDemo.spin ;;
-  sql_trigger_value: SELECT EXTRACT(HOUR FROM CURRENT_TIMESTAMP()) ;;
+  persist_for: "8 minutes"
   }
 
   dimension: age {
