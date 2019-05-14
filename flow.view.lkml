@@ -26,7 +26,7 @@ view: flow {
 
   dimension: testdate {
     type: date
-    sql:  NULL;;
+    sql:  current_date;;
   }
 
 
