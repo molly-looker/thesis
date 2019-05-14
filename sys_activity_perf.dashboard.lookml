@@ -2,7 +2,7 @@
   title: sys_activity_performance_dashboard_UDD
   layout: newspaper
   refresh: 1 hour
-  query_timezone: query_saved
+  #query_timezone: query_saved
   elements:
   - name: 'tile1'
     type: text
