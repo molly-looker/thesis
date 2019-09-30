@@ -1,4 +1,4 @@
-connection: "lookerdata_publicdata"
+connection: "lookerdata_publicdata_standard_sql"
 
 # include all the views
 include: "*.view"
@@ -14,7 +14,7 @@ datagroup: molly_thesis_default_datagroup {
 persist_with: molly_thesis_default_datagroup
 
 
-
+#comment
 explore: flow {
   label: "Spinner Demographics"
 
