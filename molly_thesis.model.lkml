@@ -4,13 +4,15 @@ connection: "lookerdata_publicdata"
 include: "*.view"
 
 # include all the dashboards
-include: "*.dashboard"
+#include: "*.dashboard"
 
 datagroup: molly_thesis_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
   max_cache_age: "1 hour"
 }
 
+
+#test
 persist_with: molly_thesis_default_datagroup
 
 
